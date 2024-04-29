@@ -2,6 +2,10 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.hero-body {
+  padding: 0.5rem !important;
+}
+
 /* footer start */
 .wrapper {
   min-height: 100vh;
@@ -13,7 +17,7 @@
 footer {
   width: 100%;
   text-align: center;
-  padding: 30px 0;
+  padding: 1rem !important;
   position: absolute;
   bottom: 0;
 }

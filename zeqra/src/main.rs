@@ -2,7 +2,7 @@
 
 use dioxus::prelude::*;
 use tracing::Level;
-use dioxus_free_icons::{icons::io_icons::{IoCloudDownload, IoLogoTwitter, IoOpen}, Icon};
+use dioxus_free_icons::{icons::io_icons::{IoCloudDownload, IoLogoGithub, IoLogoTwitter, IoOpen}, Icon};
 use serde::{Deserialize, Serialize};
 use qrcode::render::svg;
 use qrcode::QrCode;
@@ -387,12 +387,22 @@ fn Footer() -> Element {
             div { class: "container",
                 div { class: "columns",
                     div { class: "column",
-                        a {
-                            class: "button",
-                            href: "https://twitter.com/stlittle8",
-                            target: "_blank",
-                            span { class: "icon is-small mr-2", Icon { width: 16, height: 16, icon: IoLogoTwitter } }
-                            "Twitter"
+                        p {
+                            class: "buttons is-justify-content-center",
+                            a {
+                                class: "button",
+                                href: "https://twitter.com/stlittle8",
+                                target: "_blank",
+                                span { class: "icon is-small", Icon { width: 16, height: 16, icon: IoLogoTwitter } }
+                                span { "Twitter" }
+                            }
+                            a {
+                                class: "button",
+                                href: "https://github.com/st-little/zeqra",
+                                target: "_blank",
+                                span { class: "icon is-small", Icon { width: 16, height: 16, icon: IoLogoGithub } }
+                                span { "GitHub" }
+                            }
                         }
                     }
                 }
@@ -413,11 +423,20 @@ fn QrCode() -> Element {
                 div {
                     class: "container pt-5 has-text-centered",
                     div {
-                        img { src: "{data_url}" }
+                        img { src: "{data_url}", width: "150", height: "150" }
                     }
                     div {
                         class: "pt-3",
-                        a { class: "button is-medium is-success", href: "{data_url}", download: "QR-code.svg", span { class: "icon is-small mr-2", Icon { width: 24, height: 24, icon: IoCloudDownload } }, "Download" }
+                        a {
+                            class: "button is-medium is-success",
+                            href: "{data_url}",
+                            download: "QR-code.svg",
+                            span {
+                                class: "icon is-small mr-2",
+                                Icon { width: 24, height: 24, icon: IoCloudDownload }
+                            },
+                            "Download"
+                        }
                     }
                 }
             }
