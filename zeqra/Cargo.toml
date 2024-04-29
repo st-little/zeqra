@@ -1,0 +1,23 @@
+[package]
+name = "zeqra"
+version = "1.0.0"
+authors = ["st-little <https://github.com/st-little>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+dotenvy = "0.15.7"
+
+[dependencies]
+
+dioxus = { version = "0.5", features = ["web"] }
+
+# Debug
+tracing = "0.1.40"
+dioxus-logger = "0.5.0"
+qrcode = "0.14.0"
+base64 = "0.22.0"
+anyhow = "1.0.82"
+dioxus-free-icons = { version = "0.8", features = ["ionicons"] }
+serde = "1.0.199"
