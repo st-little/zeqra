@@ -43,6 +43,22 @@ impl AppState {
 #[derive(PartialEq, Props, Clone)]
 struct MakeQrCodeProps {
     text: String,
+    width: u32,
+    height: u32,
+    dark_color: String,
+    light_color: String,
+}
+
+impl Default for MakeQrCodeProps {
+    fn default() -> Self {
+        Self {
+            text: "".to_string(),
+            width: 200,
+            height: 200,
+            dark_color: "#000000".to_string(),
+            light_color: "#ffffff".to_string(),
+        }
+    }
 }
 
 fn main() {
@@ -65,7 +81,7 @@ fn App() -> Element {
             form {
                 class: "box",
                 onsubmit: move |ev| {
-                    let qrCode = makeQrCode(MakeQrCodeProps { text: ev.values().get("text").unwrap().as_value() });
+                    let qrCode = makeQrCode(MakeQrCodeProps { text: ev.values().get("text").unwrap().as_value(), ..Default::default() });
                     match qrCode {
                         Ok(data_url) => {
                             app_state.write().isError = false;
@@ -472,9 +488,9 @@ fn ErrorMsg() -> Element {
 fn makeQrCode(props: MakeQrCodeProps) -> Result<String> {
     let code: QrCode = QrCode::new(props.text.as_bytes())?;
     let image = code.render()
-        .min_dimensions(200, 200)
-        .dark_color(svg::Color("#000000"))
-        .light_color(svg::Color("#ffffff"))
+        .min_dimensions(props.width, props.height)
+        .dark_color(svg::Color(&props.dark_color))
+        .light_color(svg::Color(&props.light_color))
         .build();
     let data_url = format!("data:image/svg+xml;base64,{}", general_purpose::STANDARD.encode(&image));
 
