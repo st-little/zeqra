@@ -1,7 +1,6 @@
 #![allow(non_snake_case)]
 
 use dioxus::prelude::*;
-use tracing::Level;
 use dioxus_free_icons::{icons::io_icons::{IoCloudDownload, IoLogoGithub, IoLogoTwitter, IoOpen}, Icon};
 use serde::{Deserialize, Serialize};
 use qrcode::render::svg;
@@ -62,8 +61,6 @@ impl Default for MakeQrCodeProps {
 }
 
 fn main() {
-    // Init logger
-    dioxus_logger::init(Level::INFO).expect("failed to init logger");
     launch(App);
 }
 
@@ -121,7 +118,7 @@ fn App() -> Element {
             }
         }
         ErrorMsg {}
-        QrCode {}
+        QrCodeImage {}
         Footer{}
         TermsOfUseModal {}
         PrivacyPolicyModal {}
@@ -429,7 +426,7 @@ fn Footer() -> Element {
 }
 
 #[component]
-fn QrCode() -> Element {
+fn QrCodeImage() -> Element {
     let app_state = consume_context::<Signal<AppState>>();
     let data_url = app_state.read().dataUrl.clone();
 
@@ -457,7 +454,7 @@ fn QrCode() -> Element {
                 }
             }
         }
-        None => None
+        None => rsx! {}
     }
 }
 
@@ -481,7 +478,7 @@ fn ErrorMsg() -> Element {
                 }
             }
         }
-        false => None
+        false => rsx! {}
     }
 }
 
